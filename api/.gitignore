@@ -3,4 +3,4 @@ tmp/*
 uploads/*
 .DS_Store
 .env
-!/api/src/*.example
+!/api/src/*.env.example
