@@ -1,14 +1,8 @@
 import http from 'k6/http'
 import { sleep, check } from 'k6'
+import carregarEnvironment from './support/helpers.js'
 
-const environment = __ENV['ENVIRONMENT'] || 'local'
-const config = JSON.parse(open(`./support/environments/${environment}.json`))
-const baseUri = config.baseUri
-
-export const options = {
-    vus: 10,
-    duration: '30s',
-}
+const baseUri = carregarEnvironment()
 
 export default function () {
     const res = http.get(baseUri)
