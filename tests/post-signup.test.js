@@ -1,7 +1,7 @@
 import http from 'k6/http'
 import { sleep, check } from 'k6'
-import carregarEnvironment from './support/helpers.js'
-import { gerarEmail, gerarSenha } from './support/helpers.js'
+import carregarEnvironment from './support/utils.js'
+import { gerarEmail, gerarSenha } from './support/utils.js'
 
 const baseUri = carregarEnvironment()
 
