@@ -7,6 +7,16 @@ const carregarEnvironment = function () {
     return config.baseUri
 }
 
+function gerarNumerosAleatorios(qtdeDigitos) {
+  var text = "";
+  var possible = "0123456789";
+
+  for (var i = 0; i < qtdeDigitos; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
+
 function gerarNomeSobrenome () {
     var nome = [
         "Alice",
@@ -213,7 +223,8 @@ export const gerarEmail = function () {
     var dominioEmailAleatorio = dominioEmail[Math.floor(Math.random() * dominioEmail.length)]
     var nomeSobrenome = gerarNomeSobrenome()
     var nomeSobrenomeNormalizado = nomeSobrenome.toLowerCase().replace(/\s/g, ".").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    var email = nomeSobrenomeNormalizado + dominioEmailAleatorio
+    var email = nomeSobrenomeNormalizado + 
+     "."  + gerarNumerosAleatorios(5) + dominioEmailAleatorio;
 
     return email
 }

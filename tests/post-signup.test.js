@@ -1,7 +1,7 @@
 import http from 'k6/http'
 import { sleep, check } from 'k6'
-import carregarEnvironment from './support/helpers.js'
-import { gerarEmail, gerarSenha } from './support/helpers.js'
+import carregarEnvironment from './support/utils.js'
+import { gerarEmail, gerarSenha } from './support/utils.js'
 
 const baseUri = carregarEnvironment()
 
@@ -18,8 +18,8 @@ export default function () {
 
     const headers = {
         'headers': { 
-            'Accept': 'application/json', 
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json' 
         }
     }
 
@@ -27,7 +27,7 @@ export default function () {
     const res = http.post(`${baseUri}/signup`, body, headers)
 
     check(res, {
-        'POST signup - Validar status 201 Created': (r) => r.status === 201,
+        'POST /signup - Validar status 201 Created': (r) => r.status === 201,
         '- Validar campo id retornado com sucesso': (r) => r.json('_id') !== null, 
         '- Validar campo email retornado com sucesso': (r) => r.json('email') === `${emailEsperado}` 
     })
